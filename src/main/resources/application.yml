@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: CustomFilter
+      routes:
+        - id: fideliveryModule
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/fidelivery/**
+#            - filters:
+#                - CustomFilter
+        - id: merchantModule
+          uri: http://localhost:8084/
+          predicates:
+            - Path=/api/**
+#            - filters:
+#                - CustomFilter
